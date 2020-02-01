@@ -18,6 +18,12 @@ public:
 private slots:
     void on_textEdit_textChanged();
 
+    void on_lineEdit_editingFinished();
+
+    void on_lineEdit_2_editingFinished();
+
+    void on_lineEdit_3_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 };

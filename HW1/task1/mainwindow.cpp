@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "qmath.h"
+#include <complex>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +14,26 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+QString makeResult(std::complex<qreal> complex_x1, std::complex<qreal> complex_x2) {
+    QString x1_real = QString::number(complex_x1.real());
+    QString x2_real = QString::number(complex_x2.real());
+
+    QString res = "X1: ";
+    res += x1_real;
+    if (complex_x1.imag() != 0) {
+        res += "+ " + QString::number(complex_x1.imag()) + "i";
+    }
+
+    res += " X2: ";
+    res += x2_real;
+    if (complex_x2.imag() != 0) {
+        res += "+ " + QString::number(complex_x2.imag()) + "i";
+    }
+
+    return res;
+}
+
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -28,19 +49,14 @@ void MainWindow::on_pushButton_clicked()
 
     qreal desc = qPow(val_b, 2) - 4 * val_a * val_c;
 
-    if (desc < 0) {
-        ui->label_res->setText("Error: cant calculate result, discriminant < 0");
-        return;
-    }
+    std::complex<qreal> complex_desc(desc, 0);
 
-    desc = qSqrt(desc);
-    QString x1 = QString::number((-val_b + desc)/(2 * val_a));
-    QString x2 = QString::number((-val_b - desc)/(2 * val_a));
+    std::complex<qreal> complex_val_a(val_a, 0);
+    std::complex<qreal> complex_val_b(val_b, 0);
+    std::complex<qreal> complex_val_c(val_c, 0);
 
-    QString res = "X1: ";
-    res += x1;
-    res += " X2: ";
-    res += x2;
+    std::complex<qreal> complex_x1 = (-complex_val_b + std::sqrt(complex_desc))/(qreal(2) * complex_val_a);
+    std::complex<qreal> complex_x2 = (-complex_val_b - std::sqrt(complex_desc))/(qreal(2) * complex_val_a);
 
-    ui->label_res->setText(res);
+    ui->label_res->setText(makeResult(complex_x1, complex_x2));
 }
