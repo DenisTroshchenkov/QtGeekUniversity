@@ -39,6 +39,7 @@ public:
     QPushButton *pushButton_Prev;
     QPushButton *pushButton_Save;
     QPushButton *pushButton_OpenFile;
+    QLabel *label_read_only_mode;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -55,7 +56,7 @@ public:
         plainTextEdit->setGeometry(QRect(30, 40, 821, 351));
         label_current_file = new QLabel(centralWidget);
         label_current_file->setObjectName(QStringLiteral("label_current_file"));
-        label_current_file->setGeometry(QRect(30, 397, 401, 21));
+        label_current_file->setGeometry(QRect(30, 400, 451, 21));
         pushButton_ReadMe = new QPushButton(centralWidget);
         pushButton_ReadMe->setObjectName(QStringLiteral("pushButton_ReadMe"));
         pushButton_ReadMe->setGeometry(QRect(760, 0, 84, 34));
@@ -75,6 +76,9 @@ public:
         pushButton_OpenFile = new QPushButton(splitter);
         pushButton_OpenFile->setObjectName(QStringLiteral("pushButton_OpenFile"));
         splitter->addWidget(pushButton_OpenFile);
+        label_read_only_mode = new QLabel(centralWidget);
+        label_read_only_mode->setObjectName(QStringLiteral("label_read_only_mode"));
+        label_read_only_mode->setGeometry(QRect(617, 10, 101, 20));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -100,6 +104,7 @@ public:
         pushButton_Prev->setText(QApplication::translate("MainWindow", "<--", Q_NULLPTR));
         pushButton_Save->setText(QApplication::translate("MainWindow", "Save", Q_NULLPTR));
         pushButton_OpenFile->setText(QApplication::translate("MainWindow", "Open File", Q_NULLPTR));
+        label_read_only_mode->setText(QString());
     } // retranslateUi
 
 };

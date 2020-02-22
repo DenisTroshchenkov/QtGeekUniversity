@@ -7,6 +7,8 @@
 #include <QStack>
 #include <QTime>
 #include <QFileDialog>
+#include <QDebug>
+
 
 #define MIN_TIME_FOR_SAVE_IN_STACK 1
 
@@ -32,6 +34,13 @@ private slots:
     void on_pushButton_ReadMe_clicked();
 
     void on_plainTextEdit_textChanged();
+
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) override;
+
+private slots:
+    void switchReadOnlyMode();
+
 
 private:
     Ui::MainWindow *ui;

@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->plainTextEdit->installEventFilter(this);
+    ui->plainTextEdit->setContextMenuPolicy(Qt::ActionsContextMenu);
 }
 
 MainWindow::~MainWindow()
@@ -95,5 +97,28 @@ void MainWindow::on_plainTextEdit_textChanged()
        stack.push(current_text);
        current_text = str;
        last_update = current_time;
+    }
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    if (obj == ui->plainTextEdit && event->type() == QEvent::ContextMenu)
+    {
+        QContextMenuEvent *contextEvent = static_cast<QContextMenuEvent*>(event);
+        static_cast<QMenu*>(obj)->addAction("Switch read only mode", this, SLOT(switchReadOnlyMode()));
+
+        return true;
+    }
+
+    return QObject::eventFilter(obj, event);
+}
+
+void MainWindow::switchReadOnlyMode() {
+    if (ui->plainTextEdit->isReadOnly()) {
+        ui->plainTextEdit->setReadOnly(false);
+        ui->label_read_only_mode->setText("");
+    } else {
+        ui->plainTextEdit->setReadOnly(true);
+        ui->label_read_only_mode->setText("Read only");
     }
 }
