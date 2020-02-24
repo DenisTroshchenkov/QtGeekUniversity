@@ -22,7 +22,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -41,31 +40,30 @@ public:
     QPushButton *pushButton_OpenFile;
     QLabel *label_read_only_mode;
     QMenuBar *menuBar;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(885, 493);
+        MainWindow->resize(885, 559);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         plainTextEdit = new QPlainTextEdit(centralWidget);
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-        plainTextEdit->setGeometry(QRect(30, 40, 821, 351));
+        plainTextEdit->setGeometry(QRect(20, 70, 821, 351));
         label_current_file = new QLabel(centralWidget);
         label_current_file->setObjectName(QStringLiteral("label_current_file"));
-        label_current_file->setGeometry(QRect(30, 400, 451, 21));
+        label_current_file->setGeometry(QRect(20, 430, 451, 21));
         pushButton_ReadMe = new QPushButton(centralWidget);
         pushButton_ReadMe->setObjectName(QStringLiteral("pushButton_ReadMe"));
-        pushButton_ReadMe->setGeometry(QRect(760, 0, 84, 34));
+        pushButton_ReadMe->setGeometry(QRect(750, 30, 84, 34));
         lineEdit = new QLineEdit(centralWidget);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(590, 390, 261, 32));
+        lineEdit->setGeometry(QRect(580, 420, 261, 32));
         splitter = new QSplitter(centralWidget);
         splitter->setObjectName(QStringLiteral("splitter"));
-        splitter->setGeometry(QRect(30, 0, 252, 34));
+        splitter->setGeometry(QRect(20, 30, 252, 34));
         splitter->setOrientation(Qt::Horizontal);
         pushButton_Prev = new QPushButton(splitter);
         pushButton_Prev->setObjectName(QStringLiteral("pushButton_Prev"));
@@ -78,15 +76,14 @@ public:
         splitter->addWidget(pushButton_OpenFile);
         label_read_only_mode = new QLabel(centralWidget);
         label_read_only_mode->setObjectName(QStringLiteral("label_read_only_mode"));
-        label_read_only_mode->setGeometry(QRect(617, 10, 101, 20));
+        label_read_only_mode->setGeometry(QRect(607, 40, 101, 20));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 885, 30));
+        menuBar->setDefaultUp(false);
+        menuBar->setNativeMenuBar(true);
         MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
